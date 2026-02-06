@@ -3,9 +3,9 @@ import java.util.*;
 public class main {
   public static void main(String[] args)
   {
-    Printarraylist;
+    Printarraylist();
   }
-  public static void Printarraylist
+  public static void Printarraylist()
   {
     List<String> listStrings = new ArrayList<String>();
     listStrings.add("One");
