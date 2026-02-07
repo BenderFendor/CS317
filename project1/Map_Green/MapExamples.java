@@ -116,32 +116,15 @@ public class MapExamples {
     countryCodesWorld.putAll(countryCodesEU);
     System.out.println("After: " + countryCodesWorld);
 
-    TreeMap<String, Double> movieRatings = new TreeMap<String, Double>(new MovieRatingComparator());
+    TreeMap<String, Double> movieRatings = new TreeMap<String, Double>(Comparator.reverseOrder());
     movieRatings.put("Inception", 8.8);
     movieRatings.put("The Dark Knight", 9.0);
     movieRatings.put("Pulp Fiction", 8.9);
     movieRatings.put("The Matrix", 8.7);
 
-    System.out.println("Movies sorted by rating (descending):");
+    System.out.println("Movies in descending alphabetical order:");
     for (Map.Entry<String, Double> entry : movieRatings.entrySet()) {
       System.out.println(entry.getKey() + " => " + entry.getValue());
-    }
-  }
-
-  static class MovieRatingComparator implements Comparator<String> {
-    private Map<String, Double> ratings;
-
-    public MovieRatingComparator() {
-      this.ratings = new HashMap<String, Double>();
-    }
-
-    public int compare(String movie1, String movie2) {
-      Double rating1 = ratings.get(movie1);
-      Double rating2 = ratings.get(movie2);
-      if (rating1 == null || rating2 == null) {
-        return movie2.compareTo(movie1);
-      }
-      return rating2.compareTo(rating1);
     }
   }
 }

@@ -46,60 +46,69 @@ public class ListSorting {
     Collections.reverse(listForReverse);
     System.out.println("After reversing: " + listForReverse);
 
-    List<Employee> listEmployees = new ArrayList<Employee>();
-    listEmployees.add(new Employee("Tom", 45, 80000));
-    listEmployees.add(new Employee("Sam", 56, 75000));
-    listEmployees.add(new Employee("Alex", 30, 120000));
-    listEmployees.add(new Employee("Peter", 25, 60000));
-    System.out.println("Before sorting: " + listEmployees);
-    Collections.sort(listEmployees);
-    System.out.println("After sorting: " + listEmployees);
+    List<Movie> listMovies = new ArrayList<Movie>();
+    listMovies.add(new Movie("Django Unchained", 8.5));
+    listMovies.add(new Movie("Iron Man 1", 7.9));
+    listMovies.add(new Movie("Motorcycle Diaries", 7.7));
+    listMovies.add(new Movie("Lady Snowblood", 7.6));
+    listMovies.add(new Movie("The Minecraft Movie", 5.5));
+    listMovies.add(new Movie("Saving Private Ryan", 8.6));
+    listMovies.add(new Movie("The Matrix", 8.7));
+    listMovies.add(new Movie("Pulp Fiction", 3.0));
+    System.out.println("Before sorting: " + listMovies);
+    Collections.sort(listMovies);
+    System.out.println("After sorting: " + listMovies);
 
-    List<Employee> listEmployees2 = new ArrayList<Employee>();
-    listEmployees2.add(new Employee("Tom", 45, 80000));
-    listEmployees2.add(new Employee("Sam", 56, 75000));
-    listEmployees2.add(new Employee("Alex", 30, 120000));
-    listEmployees2.add(new Employee("Peter", 25, 60000));
-    System.out.println("Before sorting: " + listEmployees2);
-    Collections.sort(listEmployees2, new EmployeeAgeComparator());
-    System.out.println("After sorting: " + listEmployees2);
+    List<Movie> listMovies2 = new ArrayList<Movie>();
+    listMovies2.add(new Movie("Django Unchained", 8.5));
+    listMovies2.add(new Movie("Iron Man 1", 7.9));
+    listMovies2.add(new Movie("Motorcycle Diaries", 7.7));
+    listMovies2.add(new Movie("Lady Snowblood", 7.6));
+    listMovies2.add(new Movie("The Minecraft Movie", 5.5));
+    listMovies2.add(new Movie("Saving Private Ryan", 8.6));
+    listMovies2.add(new Movie("The Matrix", 8.7));
+    listMovies2.add(new Movie("Pulp Fiction", 3.0));
+    System.out.println("Before sorting: " + listMovies2);
+    Collections.sort(listMovies2, new MovieTitleComparator());
+    System.out.println("After sorting: " + listMovies2);
   }
 
-  static class Employee implements Comparable<Employee> {
-    private String name;
-    private int age;
-    private int salary;
+  static class Movie implements Comparable<Movie> {
+    private String title;
+    private double rating;
 
-    public Employee(String name, int age, int salary) {
-      this.name = name;
-      this.age = age;
-      this.salary = salary;
+    public Movie(String title, double rating) {
+      this.title = title;
+      this.rating = rating;
     }
 
-    public String getName() {
-      return name;
+    public String getTitle() {
+      return title;
     }
 
-    public int getAge() {
-      return age;
+    public double getRating() {
+      return rating;
     }
 
-    public int getSalary() {
-      return salary;
-    }
-
-    public int compareTo(Employee employee) {
-      return employee.salary - this.salary;
+    public int compareTo(Movie movie) {
+      double diff = movie.rating - this.rating;
+      if (diff > 0) {
+        return 1;
+      } else if (diff < 0) {
+        return -1;
+      } else {
+        return 0;
+      }
     }
 
     public String toString() {
-      return String.format("(%s, %d, %d)", name, age, salary);
+      return String.format("(%s, %.1f)", title, rating);
     }
   }
 
-  static class EmployeeAgeComparator implements Comparator<Employee> {
-    public int compare(Employee emp1, Employee emp2) {
-      return emp1.getAge() - emp2.getAge();
+  static class MovieTitleComparator implements Comparator<Movie> {
+    public int compare(Movie m1, Movie m2) {
+      return m1.getTitle().compareTo(m2.getTitle());
     }
   }
 }

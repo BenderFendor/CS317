@@ -17,6 +17,7 @@ public class PriorityQueueExample {
     intQ.add(19);
 
     System.out.println("Size: " + intQ.size());
+    System.out.println("Elements in priority queue: " + intQ);
 
     while(!intQ.isEmpty()){
       System.out.println(intQ.remove());

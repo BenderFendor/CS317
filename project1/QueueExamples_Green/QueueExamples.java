@@ -1,24 +1,22 @@
 import java.util.ArrayDeque;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Queue;
 
 public class QueueExamples {
 
   public static void main(String[] args) {
-    Queue<String> namesQueue = new LinkedList<String>();
+    Queue<String> namesQueue = new ArrayDeque<String>();
     Queue<Integer> numbersDeque = new ArrayDeque<Integer>();
 
-    Queue<String> queueNames = new LinkedList<String>();
+    Queue<String> queueNames = new ArrayDeque<String>();
     queueNames.add("Mary");
     queueNames.offer("John");
 
-    Queue<String> queueCustomers = new LinkedList<String>();
+    Queue<String> queueCustomers = new ArrayDeque<String>();
     queueCustomers.offer("Jack");
     String next = queueCustomers.remove();
     String polled = queueCustomers.poll();
 
-    Queue<String> queuePeeks = new LinkedList<String>();
+    Queue<String> queuePeeks = new ArrayDeque<String>();
     queuePeeks.offer("Jack");
     System.out.println(queuePeeks.peek());
     System.out.println(queuePeeks.element());
