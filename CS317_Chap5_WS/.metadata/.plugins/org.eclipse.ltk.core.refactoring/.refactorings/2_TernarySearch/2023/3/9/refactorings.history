@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;BinarySearch&apos; to &apos;TernarySearch&apos;&#x0A;- Original project: &apos;2_TernarySearch&apos;&#x0A;- Original element: &apos;BinarySearch&apos;&#x0A;- Renamed element: &apos;TernarySearch&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;BinarySearch&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{BinarySearch.java[BinarySearch" matchStrategy="1" name="TernarySearch" qualified="false" references="true" similarDeclarations="false" stamp="1677652996036" textual="false" version="1.0"/>
+</session>
