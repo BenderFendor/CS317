@@ -1,0 +1,8 @@
+INDEX VERSION 1.131+/Users/JiaY/Dropbox/Private/D_Univ/D_Courses/D_Spring2023/CS317_S23/PPTs/Chap5_Divide_Conquer/CS317_Chap5_WS/.metadata/.plugins/org.eclipse.jdt.core
+4115785139.index
+2576132591.index
+274244133.index
+4045500823.index
+2420961010.index
+2888586291.index
+3347056737.index

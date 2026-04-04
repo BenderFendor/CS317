@@ -1,0 +1,175 @@
+public class QuickSelect {
+
+  /**
+   * Method to find the kth smallest element in the input array
+   * @param arr input array
+   * @param k kth smallest element to find
+   * @return kth smallest element
+   */
+  public static int quickSelect(int[] arr, int k) {
+    // Subtract 1 from k since arrays are 0-indexed
+	//find element whose correct location is k-1.
+    return quickSelect(arr, 0, arr.length - 1, k - 1);
+  }
+
+  /**
+   * Helper method to recursively find the kth smallest element
+   * @param arr input array
+   * @param left left index of array
+   * @param right right index of array
+   * @param k0: k-1
+   * @return value of the kth smallest element
+   */
+  
+  private static int quickSelect(int[] arr, int left, int right, int k0) {
+	     
+	  	System.out.println("quickSelect(arr[" + left + ".." + right + "], " + k0 + ")" );
+	    // Base case: the list contains only one element
+	    if (left == right) {
+	      return arr[left];
+	    }
+
+	    // Partition the list into two sublists around a pivot element
+	    int pivotIndex = partition(arr, left, right);
+	    //System.out.print("\t");
+	    printArray(arr);
+	    
+	    
+	    // If the pivot is the kth smallest element, return it
+	    if (k0 == pivotIndex) {
+	      return arr[k0];
+	    }
+	    // If the kth smallest element is to the left of the pivot, recurse on the left sublist
+	    else if (k0 < pivotIndex) {
+	      System.out.println("\tcall quickSelect(arr[" + left + ".." + (pivotIndex - 1) + "], "+ k0 + ")\n");
+	      return quickSelect(arr, left, pivotIndex - 1, k0);
+	    }
+	    // If the kth smallest element is to the right of the pivot, recurse on the right sublist
+	    else {
+	    	 System.out.println("\tcall quickSelect(arr[" + (pivotIndex + 1) +  ".." + right + "], "+ k0 + ")\n");
+	      return quickSelect(arr, pivotIndex + 1, right, k0);
+	    }
+  }//end of quickSelect()
+  
+  private static int quickSelect_nocomment(int[] arr, int left, int right, int k0) {
+	     
+	    // Base case: the list contains only one element
+	    if (left == right) {
+	      return arr[left];
+	    }
+
+	    // Partition the list into two sublists around a pivot element
+	    int pivotIndex = partition(arr, left, right);
+	        
+	    // If the pivot is the kth smallest element, return it
+	    if (k0 == pivotIndex) {
+	      return arr[k0];
+	    }
+	    // If the kth smallest element is to the left of the pivot, recurse on the left sublist
+	    else if (k0 < pivotIndex) {
+	      return quickSelect(arr, left, pivotIndex - 1, k0);
+	    }
+	    // If the kth smallest element is to the right of the pivot, recurse on the right sublist
+	    else {
+	      return quickSelect(arr, pivotIndex + 1, right, k0);
+	    }
+ }//end of quickSelect()
+  /**
+   * Helper method to partition the input array around a pivot element
+   * @param arr input array
+   * @param left left index of array
+   * @param right right index of array
+   * @return index of pivot element
+   */
+
+
+  private static int partition(int[] arr, int left, int right) {
+	    // Choose the last element of the array as the pivot element
+	    int pivot = arr[left];
+	    // Initialize the index of the smaller element
+	    int s = left;
+
+	    // Iterate over the array and swap elements smaller than 
+	    // the pivot with the element at index i
+	    for (int i = left + 1; i <= right; i++) {
+	      if (arr[i] < pivot) {
+	    	s++;
+	        swap(arr, s, i);       
+	      }
+	    }
+
+	    // Swap the pivot element with the element at index i
+	    swap(arr, left, s);
+
+	    // Return the index of the pivot element
+	    System.out.println("\tpivot = " + pivot + " pivotIndex = " + s);
+	    return s;
+   }//end partition()
+  
+//private static int partition0(int[] arr, int left, int right) {
+//// Choose the last element of the array as the pivot element
+//int pivot = arr[right];
+//// Initialize the index of the smaller element
+//int i = left;
+//
+//// Iterate over the array and swap elements smaller than the pivot with the element at index i
+//for (int j = left; j < right; j++) {
+//  if (arr[j] < pivot) {
+//    swap(arr, i, j);
+//    i++;
+//  }
+//}
+//
+//// Swap the pivot element with the element at index i
+//swap(arr, i, right);
+//
+//// Return the index of the pivot element
+//System.out.println("pivot = " + pivot + " pivotIndex = " + i);
+//return i;
+//}
+  
+  /**
+   * Helper method to swap two elements in an array
+   * @param arr input array
+   * @param i index of first element
+   * @param j index of second element
+   */
+  private static void swap(int[] arr, int i, int j) {
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
+  
+  private static void printArray(int[] arr) {
+	    System.out.print("\t  ");
+	  	for(int i = 0; i < arr.length; i++) {
+	    	System.out.print(i + "  ");
+	    }
+	  	System.out.println();
+	  	
+	  	System.out.print("\t[");
+	    for(int e: arr) {
+	    	System.out.print(e + " ");
+	    }
+	    System.out.println("]");
+  }
+
+  /**
+   * Main method to test the QuickSelect algorithm
+   * @param args command line arguments (not used)
+   */
+  public static void main(String[] args) {
+    // Create an example input array and find the 3rd smallest element
+    int[] arr = {20, 60, 40, 80, 70, 30, 10, 50};
+    int k = 5;
+
+    System.out.println("Original array: ");
+    printArray(arr);
+    System.out.println();
+    
+    System.out.println("quickSelect(arr,  " + k);
+    int kthSmallest = quickSelect(arr, k);
+    
+    System.out.println("\nThe " + k + "th smallest element is: " + kthSmallest);
+  }
+}
