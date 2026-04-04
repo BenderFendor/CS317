@@ -1,0 +1,47 @@
+public class Graph {
+    private int[][] adjMatrix;
+    private int numVertices;
+    private boolean[] visited;
+    //private int[] parent;
+    private int[] visitingOrder;
+    private int count;
+
+    public Graph(int numVertices) {
+        adjMatrix = new int[numVertices][numVertices];
+        this.numVertices = numVertices;
+        visited = new boolean[numVertices];
+        //parent = new int[numVertices];
+        visitingOrder = new int[numVertices];
+        count = 0;
+    }
+
+    public void addEdge(int src, int dest) {
+        adjMatrix[src][dest] = 1;
+    }
+
+    public void DFS() {
+        for (int i = 0; i < visited.length; i++) {
+            if (!visited[i]) {
+                dfs(i);
+            }
+        }
+    }//end dfs()
+
+    private void dfs(int v) {
+        visited[v] = true;
+        visitingOrder[v] = ++count;
+
+        for (int adj = 0; adj < numVertices; adj++) {
+            if (adjMatrix[v][adj] == 1 && !visited[adj]) {
+                //parent[adj] = v;
+                dfs(adj);
+            }
+        }
+    }//end dfs(i)
+    
+    public void displayVisitingOrder() {
+    	for (int i = 0; i < numVertices; i++) {
+            System.out.println("Vertex " + i + " visited order: " + visitingOrder[i]);
+        }
+    }
+}//end class Graph

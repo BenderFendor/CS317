@@ -1,0 +1,78 @@
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class DFS_Recursive_AdjMatrix {
+	    public static void main(String[] args) {
+	    	Graph g = new Graph(13);
+	        int index = 0;
+	    	try {
+	            File file = new File("graph.txt");
+	            Scanner scanner = new Scanner(file);
+
+	            while (scanner.hasNextLine()) {
+	                String line = scanner.nextLine();
+	                String[] nodes = line.split(", ");
+	                int from = Integer.parseInt(nodes[0]);
+	                int to = Integer.parseInt(nodes[1]);
+	                g.addEdge(from, to);
+	    	        g.addEdge(to, from);
+	           
+	                index++;
+	            }
+	            
+	            scanner.close();
+
+
+	        } catch (FileNotFoundException e) {
+	            System.out.println("File not found.");
+	        }
+
+//	        Graph g = new Graph(13);
+//	        g.addEdge(0, 2);
+//	        g.addEdge(2, 0);
+//	        
+//	        g.addEdge(1, 2);
+//	        g.addEdge(2, 1);
+//	        
+//	        g.addEdge(2, 3);
+//	        g.addEdge(3, 2);
+//	        
+//	        g.addEdge(2, 4);
+//	        g.addEdge(4, 2);
+//	        
+//	        g.addEdge(2, 5);
+//	        g.addEdge(5, 2);
+//	        
+//	        g.addEdge(2, 8);
+//	        g.addEdge(8, 2);
+//	        
+//	        g.addEdge(2, 9);
+//	        g.addEdge(9, 2);
+//	        
+//	        g.addEdge(3, 8);
+//	        g.addEdge(8, 3);
+//	        
+//	        g.addEdge(4, 5);
+//	        g.addEdge(5, 4);
+//	        
+//	        g.addEdge(6, 8);
+//	        g.addEdge(8, 6);
+//	        
+//	        g.addEdge(7, 9);
+//	        g.addEdge(9, 7);
+//
+//	        g.addEdge(10, 11);
+//	        g.addEdge(11, 10);
+//	        g.addEdge(10, 12);
+//	        g.addEdge(12, 10);
+//	        g.addEdge(11, 12);
+//	        g.addEdge(12, 11);
+//	        
+	        g.DFS();
+	        g.displayVisitingOrder();
+	        g.displayNumOfConnectedComponents();
+	        
+	    }
+}//end of DFS_NonRecursive1

@@ -1,0 +1,38 @@
+public class Graph {
+    private int[][] adjacencyMatrix;
+    private boolean[] visited;
+    private int[] parent;
+    private int[] visitingOrder;
+    private int count;
+
+    public Graph(int[][] adjacencyMatrix) {
+        this.adjacencyMatrix = adjacencyMatrix;
+        int numVertices = adjacencyMatrix.length;
+        this.visited = new boolean[numVertices];
+        this.parent = new int[numVertices];
+        this.visitingOrder = new int[numVertices];
+        this.count = 0;
+    }
+
+    public void dfs() {
+        for (int i = 0; i < visited.length; i++) {
+            if (!visited[i]) {
+                dfs(i);
+            }
+        }
+    }
+
+    private void dfs(int v) {
+        visited[v] = true;
+        visitingOrder[v] = ++count;
+
+        for (int adj = 0; adj < adjacencyMatrix.length; adj++) {
+            if (adjacencyMatrix[v][adj] == 1 && !visited[adj]) {
+                visited[adj] = true;
+                visitingOrder[adj] = ++count;
+                parent[adj] = v;
+                dfs(adj);
+            }
+        }
+    }
+}

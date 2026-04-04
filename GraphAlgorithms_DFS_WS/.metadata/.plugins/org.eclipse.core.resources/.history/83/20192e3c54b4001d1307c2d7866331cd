@@ -1,0 +1,45 @@
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
+import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.ui.view.Viewer;
+
+public class GraphVisualization {
+
+    public static void main(String[] args) {
+        // create a graph with 20 vertices
+        Graph graph = new SingleGraph("Adjacency Matrix Graph");
+        int numVertices = 20;
+        for (int i = 0; i < numVertices; i++) {
+            graph.addNode(Integer.toString(i));
+        }
+
+        // create an adjacency matrix with some random connections
+        int[][] adjMatrix = new int[numVertices][numVertices];
+        for (int i = 0; i < numVertices; i++) {
+            for (int j = 0; j < numVertices; j++) {
+                if (i != j && Math.random() < 0.2) {
+                    adjMatrix[i][j] = 1;
+                    adjMatrix[j][i] = 1;
+                    System.out.print(adjMatrix[i][j]);
+                }
+            }
+        }
+        
+
+        // add edges to the graph based on the adjacency matrix
+        for (int i = 0; i < numVertices; i++) {
+            for (int j = 0; j < numVertices; j++) {
+                if (adjMatrix[i][j] == 1) {
+                    graph.addEdge(Integer.toString(i) + "-" + Integer.toString(j), Integer.toString(i), Integer.toString(j));
+                }
+            }
+        }
+
+        // visualize the graph
+        Viewer viewer = graph.display();
+        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+        for (Node node : graph) {
+            node.setAttribute("ui.label", node.getId());
+        }
+    }//end of main()
+}//end of class GraphVisualization

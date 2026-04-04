@@ -1,0 +1,120 @@
+/**
+ * The graph.txt is generated from the RandomGraphVisualization project.
+ */
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+
+public class Graph1 {
+    private List<List<Integer>> adjList;
+    private int numVertices;
+    private boolean[] visited;
+    private int[] visitingOrder;
+    private int count;
+    private int numOfConnectedComponents;
+
+    public Graph1(int numVertices) {
+        adjList = new ArrayList<>();
+        for (int i = 0; i < numVertices; i++) {
+            adjList.add(new ArrayList<>());
+        }
+        this.numVertices = numVertices;
+        visited = new boolean[numVertices];
+        visitingOrder = new int[numVertices];
+        count = 0;
+    }
+
+    public void addEdge(int src, int dest) {
+        adjList.get(src).add(dest);
+    }
+
+    /**
+     * DFS(): Depth-First-Search traverse the graph.
+     */
+    public void DFS() {
+        for (int i = 0; i < visited.length; i++) {
+            if (!visited[i]) {
+                dfs(i);
+                numOfConnectedComponents++;
+            }
+        }
+    }
+
+    /**
+     * dfs(): depth-first-search a connected component starting with node v.
+     * @param v
+     */
+    private void dfs(int v) {
+        visited[v] = true;
+        visitingOrder[v] = ++count;
+
+        for (int adj : adjList.get(v)) {
+            if (!visited[adj]) {
+                dfs(adj);
+            }
+        }
+    }
+
+    /**
+     * displayVisitingOrder(): Display the DFS node visiting order. 
+     */
+    public void displayVisitingOrder() {
+        String[] nodeNames = new String[numVertices];
+        for (int i = 0; i < visitingOrder.length; i++) {
+            nodeNames[i] = i + "";
+        }
+
+        HashMap<Integer, String> nodeMap = new HashMap<>();
+        for (int i = 0; i < visitingOrder.length; i++) {
+            nodeMap.put(visitingOrder[i], nodeNames[i]);
+        }
+
+        int[] sortedVisitingOrder = Arrays.copyOf(visitingOrder, visitingOrder.length);
+        Arrays.sort(sortedVisitingOrder);
+
+        System.out.println("Visiting order: ");
+        for (int i = 0; i < sortedVisitingOrder.length; i++) {
+            System.out.print(nodeMap.get(sortedVisitingOrder[i]) + " ");
+        }
+        System.out.println();
+    }
+
+    /**
+     * displayNumOfConnectedComponents(): Display numOfConnectedComponents.
+     */
+    public void displayNumOfConnectedComponents() {
+        System.out.print("\nThere are " + numOfConnectedComponents + " connected components");
+    }
+    
+    /**
+     * readGraph(): read the graph into the adjacency list from a file.
+     */
+    public void readGraph() {
+    	int index = 0;
+    	try {
+            File file = new File("graph.txt");
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] nodes = line.split(", ");
+                int from = Integer.parseInt(nodes[0]);
+                int to = Integer.parseInt(nodes[1]);
+                addEdge(from, to);
+    	        addEdge(to, from);
+           
+                index++;
+            }
+            
+            scanner.close();
+
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
+    }//end readGraph()
+}//end of class
